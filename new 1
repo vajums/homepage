@@ -1,0 +1,35 @@
+Here is how to deploy your site live to the web, swap themes, and customize layouts and styles.
+
+Step 1: Make It Public on GitHub Pages
+Commit and push your current changes:
+Open a terminal, make sure all your recent Gemfile edits and .gitignore rules are pushed:
+
+DOS
+git add Gemfile Gemfile.lock .gitignore _config.yml
+git commit -m "Update Gemfile dependencies and ignore rules"
+git push origin main
+Configure GitHub Pages settings:
+
+Go to your repository on GitHub.com.
+
+Ensure the repository visibility is Public (Go to Settings → scroll to the Danger Zone at the bottom → change visibility to Public if it is currently Private).
+
+In the left sidebar under Code and automation, click Pages.
+
+Under Build and deployment:
+
+Source: Select Deploy from a branch.
+
+Branch: Choose main (or master) and directory / (root).
+
+Click Save.
+
+Check the live deployment:
+
+Click the Actions tab at the top of your GitHub repository. You will see a workflow named pages build and deployment.
+
+Once it shows a green checkmark (usually 30–60 seconds), your site will be live at:
+
+Plaintext
+https://<your-username>.github.io/<repo-name>/
+(If your repository is named <your-username>.github.io, the URL will simply be https://<your-username>.github.io/).

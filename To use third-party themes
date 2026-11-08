@@ -1,0 +1,108 @@
+To use third-party themes hosted on GitHub with GitHub Pages, you have two primary methods:
+
+1. **The Remote Theme Plugin (Simplest):** Uses the `jekyll-remote-theme` plugin supported directly by GitHub Pages. You don't need to install external build pipelines—you just point your config to the theme's GitHub repository (ideal for themes like `just-the-docs`).
+2. **GitHub Actions / Starter Templates (Advanced Themes):** Modern, feature-heavy themes like `jekyll-theme-chirpy` rely on custom Ruby plugins, Node.js tools, and build steps that standard GitHub Pages blocks in its legacy build environment. These use a ready-made GitHub Actions workflow to build and deploy.
+
+---
+
+### Method 1: The Remote Theme Method (e.g., `just-the-docs`)
+
+#### 1. Add `jekyll-remote-theme` to your `Gemfile`
+
+Open your `Gemfile` and ensure it includes the remote theme gem:
+
+```ruby
+source "https://rubygems.org"
+
+gem "github-pages", group: :jekyll_plugins
+gem "jekyll-remote-theme"
+gem "webrick"
+
+gem "wdm", ">= 0.1.0", :platforms => [:windows]
+gem "faraday-retry"
+
+```
+
+Run Bundler to install it locally:
+
+```cmd
+bundle install
+
+```
+
+#### 2. Update `_config.yml`
+
+Remove the old `theme:` line and replace it with `remote_theme:`, pointing to the owner/repository of the theme. Also register `jekyll-remote-theme` in the `plugins:` section:
+
+```yaml
+title: Simonas
+remote_theme: just-the-docs/just-the-docs
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-feed
+
+```
+
+#### 3. Test Locally
+
+Run your local server:
+
+```cmd
+bundle exec jekyll serve --livereload
+
+```
+
+*Note:* The first launch might take a few seconds longer because Jekyll downloads the theme files directly from GitHub into temporary storage.
+
+#### 4. Push to GitHub
+
+```cmd
+git add Gemfile Gemfile.lock _config.yml
+git commit -m "Switch to just-the-docs remote theme"
+git push origin main
+
+```
+
+GitHub Pages will automatically pull the theme repository and build your site.
+
+---
+
+### Method 2: GitHub Actions Method (for Advanced Themes like `Chirpy`)
+
+Themes like **Jekyll Chirpy** require automated SCSS compiling and custom plugins that GitHub’s legacy environment disables for security. The standard way to use Chirpy is via its official starter repository:
+
+#### 1. Create Repository from Chirpy Starter
+
+1. Go to the [chirpy-starter GitHub repository](https://github.com/cotes2020/chirpy-starter).
+2. Click **Use this template** → **Create a new repository**.
+3. Name it your target repo name (or `<username>.github.io`).
+
+#### 2. Configure GitHub Pages to use GitHub Actions
+
+1. In your new repository on GitHub, go to **Settings** → **Pages**.
+2. Under **Build and deployment** → **Source**, change from *Deploy from a branch* to **GitHub Actions**.
+
+#### 3. Clone and Configure Locally
+
+Clone your new repo locally:
+
+```cmd
+git clone https://github.com/<your-username>/<repo-name>.git
+cd <repo-name>
+bundle install
+bundle exec jekyll serve
+
+```
+
+When you push any commit to `main`, GitHub Actions will automatically run the Chirpy build script and publish the static output to GitHub Pages.
+
+---
+
+### Summary: Which should you choose?
+
+| Need | Best Choice | Approach |
+| --- | --- | --- |
+| Documentation / Knowledge base / Minimalist structure | **Just-the-Docs** | Method 1 (`jekyll-remote-theme`) |
+| Feature-rich blog (dark mode, search, tags, code copy) | **Chirpy** | Method 2 (`chirpy-starter` + GitHub Actions) |
+| Standard blog / Landing page | **Minima / Cayman** | Built-in `theme:` setting |

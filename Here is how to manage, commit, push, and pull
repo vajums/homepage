@@ -1,0 +1,62 @@
+Here is how to manage, commit, push, and pull your Jekyll website using GitHub Desktop.
+
+---
+
+### Step 1: Add Your Local Repository to GitHub Desktop
+
+If your folder (`F:\GitHub\hompage`) isn’t showing in GitHub Desktop yet:
+
+1. Open **GitHub Desktop**.
+2. Click **File** > **Add Local Repository...** (or press `Ctrl + O`).
+3. Click **Choose...**, browse to `F:\GitHub\hompage`, and click **Select Folder**.
+4. Click **Add Repository**.
+
+---
+
+### Step 2: Make Changes and Commit
+
+Whenever you add new posts, edit `_config.yml`, or modify Markdown files:
+
+1. Look at the left sidebar under the **Changes** tab. Every modified, added, or deleted file will appear with a checkbox next to it.
+2. In the bottom-left panel (**Commit to main**):
+* **Summary (required):** Type a concise message describing the edit (e.g., `Add new post` or `Update theme config`).
+* **Description (optional):** Add further details if needed.
+
+
+3. Click the blue **Commit to main** button.
+
+*At this stage, your changes are recorded in your local history, but not yet uploaded to GitHub.*
+
+---
+
+### Step 3: Push Your Changes to GitHub Pages
+
+To make your commits live on GitHub and trigger the Pages build:
+
+1. Look at the top toolbar. The button on the right will now say **Push origin** with an up arrow `↑` indicating how many local commits are ready.
+2. Click **Push origin** (or press `Ctrl + P`).
+3. Once the progress bar finishes, the button reverts to **Fetch origin**.
+
+*GitHub Pages will automatically pick up the new commit and deploy the update within 1 to 2 minutes.*
+
+---
+
+### Step 4: Pulling Changes from GitHub
+
+If you made edits directly on the GitHub website (or from another machine), you need to pull those changes down to your local computer before editing further:
+
+1. In the top toolbar, click **Fetch origin**.
+* GitHub Desktop checks the remote repository without altering your local files.
+
+
+2. If there are new changes online, the button changes to **Pull origin** with a down arrow `↓`.
+3. Click **Pull origin** (or press `Ctrl + Shift + P`).
+4. Your local files in `F:\GitHub\hompage` will now update to match GitHub.
+
+---
+
+### Recommended Day-to-Day Workflow
+
+* **Before you start editing:** Open GitHub Desktop and click **Fetch origin** (and **Pull origin** if updates exist) so your local files are up to date.
+* **While writing/testing:** Keep your local server running in Command Prompt (`bundle exec jekyll serve --livereload`) to preview changes in your browser.
+* **When finished:** Switch to GitHub Desktop, write your commit summary, click **Commit to main**, and then click **Push origin**.

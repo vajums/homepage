@@ -1,0 +1,140 @@
+Here is how to deploy your site live to the web, swap themes, and customize layouts and styles.
+
+---
+
+### Step 1: Make It Public on GitHub Pages
+
+1. **Commit and push your current changes:**
+Open a terminal, make sure all your recent `Gemfile` edits and `.gitignore` rules are pushed:
+```cmd
+git add Gemfile Gemfile.lock .gitignore _config.yml
+git commit -m "Update Gemfile dependencies and ignore rules"
+git push origin main
+
+```
+
+
+2. **Configure GitHub Pages settings:**
+* Go to your repository on [GitHub.com](https://github.com).
+* Ensure the repository visibility is **Public** (Go to **Settings** → scroll to the **Danger Zone** at the bottom → change visibility to Public if it is currently Private).
+* In the left sidebar under *Code and automation*, click **Pages**.
+* Under **Build and deployment**:
+* **Source:** Select `Deploy from a branch`.
+* **Branch:** Choose `main` (or `master`) and directory `/ (root)`.
+
+
+* Click **Save**.
+
+
+3. **Check the live deployment:**
+* Click the **Actions** tab at the top of your GitHub repository. You will see a workflow named `pages build and deployment`.
+* Once it shows a green checkmark (usually 30–60 seconds), your site will be live at:
+```text
+https://<your-username>.github.io/<repo-name>/
+
+```
+
+
+*(If your repository is named `<your-username>.github.io`, the URL will simply be `https://<your-username>.github.io/`)*.
+
+
+
+---
+
+### Step 2: Change the Theme
+
+GitHub Pages officially pre-installs a collection of standard themes:
+
+* `minima` (clean blog default)
+* `cayman` (bold header, modern landing page)
+* `slate` (dark theme, code-oriented)
+* `architect` (technical, framed structure)
+* `tactile` (soft grid paper aesthetic)
+* `merlot` (minimalist sidebar layout)
+* `dinky` (compact layout)
+
+#### How to switch:
+
+1. Open `_config.yml` in your editor.
+2. Locate or add the `theme:` line:
+```yaml
+theme: cayman
+
+```
+
+
+3. If using `bundle exec jekyll serve`, restart the server (`Ctrl + C`, then run it again) because changes to `_config.yml` require a server restart to take effect.
+4. Refresh `http://localhost:4000` to view the new look.
+
+---
+
+### Step 3: Start Customizing Content and Navigation
+
+#### 1. Site Metadata (`_config.yml`)
+
+Set global variables that Jekyll themes display in headers, footers, and page titles:
+
+```yaml
+title: Simonas
+description: Visual Effects, 3D Post-Production, and Tech Notes
+theme: minima
+
+# If your repo is named "hompage" and NOT "username.github.io", set:
+baseurl: "/hompage"
+url: "https://<your-username>.github.io"
+
+```
+
+#### 2. Add Navigation Pages
+
+Any Markdown file with YAML front matter becomes a page. Create `about.md` in the root folder:
+
+```markdown
+---
+layout: page
+title: About
+permalink: /about/
+---
+
+## About Me
+
+Write your bio, skills, or portfolio overview here.
+
+```
+
+Themes like `minima` will automatically pick up this page and place a link to `/about/` in the top navigation bar.
+
+---
+
+### Step 4: Customize CSS and Layouts
+
+Jekyll allows you to override any file inside a theme without touching the gem files. The precedence order is simple: **any file in your project folder overrides the theme's default file of the same name and path.**
+
+#### 1. Add Custom CSS
+
+Create a custom stylesheet file at `assets/css/style.scss`:
+
+```scss
+---
+---
+@import "{{ site.theme }}";
+
+/* Add custom overrides below */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #0066cc;
+}
+
+```
+
+*(The two lines of triple dashes `---` at the top are mandatory—they tell Jekyll to compile the SCSS file).*
+
+#### 2. Override Layouts or Partials
+
+If you want to modify the header, footer, or HTML structure:
+
+1. Create a folder named `_includes` or `_layouts` in your project root.
+2. Add files such as `_includes/header.html` or `_includes/footer.html` to replace the theme's built-in header or footer with your own HTML.
