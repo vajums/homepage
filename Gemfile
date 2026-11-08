@@ -9,3 +9,5 @@ gem "csv", "~> 3.3"
 
 gem "bigdecimal", "~> 4.1"
 gem "base64", "~> 0.3.0"
+gem 'wdm', '>= 0.1.0', :platforms => [:windows]
+gem 'faraday-retry'
