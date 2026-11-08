@@ -1,16 +1,10 @@
 
-
-# title: My Jekyll Site
-# description: Notes and articles hosted on GitHub Pages
-# theme: minima
-
-theme: cayman
-
-
 title: Simonas
 description: Visual Effects, 3D Post-Production, and Tech Notes
 theme: minima
 
+# theme: cayman
+
 # If your repo is named "hompage" and NOT "username.github.io", set:
-baseurl: "/hompage"
-url: "https://<your-username>.github.io"
+# title: My Jekyll Site
+# description: Notes and articles hosted on GitHub Pages
